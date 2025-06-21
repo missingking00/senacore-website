@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SenaCore | Referral Program</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #0a0a0a;
+      color: #00e0ff;
+      font-family: 'Orbitron', sans-serif;
+      margin: 0;
+      padding: 2rem;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #0ff;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+      background: #111;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #0ff4;
+    }
+    input, button {
+      font-family: 'Orbitron', sans-serif;
+      padding: 0.8rem;
+      width: 100%;
+      margin-top: 1rem;
+      border: none;
+      border-radius: 10px;
+    }
+    input {
+      background: #000;
+      color: #00e0ff;
+      border: 1px solid #0ff4;
+    }
+    button {
+      background: #00e0ff;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .leaderboard {
+      margin-top: 2rem;
+    }
+    .leaderboard-item {
+      background: #222;
+      border: 1px solid #0ff2;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 0.8rem;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <h1>🚀 SenaCore Referral Program</h1>
+
+  <div class="container">
+    <h2>Register Your Wallet</h2>
+    <input type="text" id="walletInput" placeholder="Enter your wallet address">
+    <button onclick="registerWallet()">Generate Referral Link</button>
+
+    <h2>Your Referral Link</h2>
+    <input type="text" id="referralLink" readonly>
+
+    <div class="leaderboard">
+      <h2>🔥 Leaderboard</h2>
+      <div id="leaderboardList">
+        <!-- Populated by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Powered by <strong>$SENA</strong> — The Core of AI, Crypto, and the Human Future<br>
+    © 2025 <strong>SenaCore Labs</strong>. All rights reserved.
+  </footer>
+
+  <script>
+    // Temporary data store for example (replace with actual backend logic)
+    const leaderboardData = [
+      { wallet: '0xA1...9cF', referrals: 14 },
+      { wallet: '0xB7...6De', referrals: 10 },
+      { wallet: '0xC3...7aA', referrals: 7 },
+    ];
+
+    function registerWallet() {
+      const wallet = document.getElementById('walletInput').value;
+      if (wallet.length < 10) {
+        alert('Please enter a valid wallet address.');
+        return;
+      }
+      const link = `${window.location.origin}/referral.html?ref=${wallet}`;
+      document.getElementById('referralLink').value = link;
+    }
+
+    function loadLeaderboard() {
+      const list = document.getElementById('leaderboardList');
+      leaderboardData.sort((a, b) => b.referrals - a.referrals);
+      leaderboardData.forEach(entry => {
+        const div = document.createElement('div');
+        div.className = 'leaderboard-item';
+        div.innerText = `${entry.wallet} — ${entry.referrals} referrals`;
+        list.appendChild(div);
+      });
+    }
+
+    loadLeaderboard();
+  </script>
+</body>
+</html>
