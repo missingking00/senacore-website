@@ -1,65 +1,111 @@
+/* styles.css - SenaCore Immersive Theme */
+
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #0a0a0a;
+  padding: 0;
+  font-family: 'Orbitron', sans-serif;
+  background: radial-gradient(ellipse at bottom, #0f0f1a 0%, #000000 100%);
   color: #ffffff;
+  overflow-x: hidden;
 }
 
+/* === Glowing Title === */
 .hero-section {
   text-align: center;
-  padding: 40px 20px;
-  background: linear-gradient(to bottom, #111, #000);
+  padding: 80px 20px 40px;
+  background: url('/images/neural-grid.svg') repeat;
+  background-size: cover;
+  animation: pulseGrid 15s linear infinite;
 }
 
-.token-logo-glow {
-  width: 100px;
-  filter: drop-shadow(0 0 8px #f9b233);
-  margin-bottom: 20px;
+.hero-section img.token-logo-glow {
+  width: 64px;
+  animation: glow 2s ease-in-out infinite alternate;
 }
 
 .main-title {
-  font-size: 2rem;
-  color: #f9b233;
-  text-shadow: 0 0 10px #f9b233aa;
+  font-size: 2.5rem;
+  color: #ffb800;
+  text-shadow: 0 0 10px #ffb800, 0 0 20px #ffb800;
+  margin: 20px 0 10px;
 }
 
 .subtitle {
-  font-size: 1rem;
-  color: #ccc;
+  font-size: 1.1rem;
+  color: #ddd;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
+/* === Navigation === */
 .main-nav {
   display: flex;
   justify-content: center;
-  gap: 25px;
-  padding: 15px;
-  background: #1a1a1a;
-  border-top: 1px solid #333;
-  border-bottom: 1px solid #333;
+  gap: 30px;
+  padding: 16px;
+  background-color: #111111;
+  border-bottom: 1px solid #2e2e2e;
 }
 
 .main-nav a {
-  color: #f9b233;
+  color: #ffaa00;
   text-decoration: none;
   font-weight: bold;
+  transition: color 0.3s;
 }
 
 .main-nav a:hover {
   color: #ffffff;
-  text-shadow: 0 0 5px #f9b233;
 }
 
+/* === Section Styling === */
 section {
+  padding: 40px 20px;
   max-width: 800px;
-  margin: 40px auto;
-  padding: 0 20px;
+  margin: 0 auto;
 }
 
+section h2, section h3 {
+  color: #ffb800;
+}
+
+.contract-box {
+  background: #111;
+  border: 1px solid #ffb800;
+  padding: 10px;
+  font-family: monospace;
+  color: #ffeea0;
+  margin-top: 10px;
+}
+
+/* === Social Links === */
+.social-links a {
+  display: inline-block;
+  margin-right: 15px;
+  color: #ffaa00;
+  text-decoration: none;
+}
+
+.social-links a:hover {
+  text-decoration: underline;
+}
+
+/* === Footer === */
 footer {
-  text-align: center;
+  background: #111;
   padding: 20px;
-  font-size: 0.9rem;
-  color: #888;
-  border-top: 1px solid #333;
-  margin-top: 60px;
+  text-align: center;
+  font-size: 0.9em;
+  color: #999;
+}
+
+/* === Animations === */
+@keyframes glow {
+  from { filter: drop-shadow(0 0 4px #ffaa00); }
+  to   { filter: drop-shadow(0 0 12px #ffaa00); }
+}
+
+@keyframes pulseGrid {
+  0% { background-position: 0 0; }
+  100% { background-position: 100px 100px; }
 }
