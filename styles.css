@@ -46,13 +46,29 @@ header {
 
 /* ========== Section Layout ========== */
 section {
-  padding: 30px 20px;
+  padding: 40px 20px;
   max-width: 1100px;
   margin: auto;
   text-align: center;
+  background: rgba(10, 15, 35, 0.6);
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
+  margin-bottom: 40px;
 }
 
-/* ========== Glowing Border Divider ========== */
+section h2, section h3 {
+  color: #00f0ff;
+  margin-bottom: 15px;
+  text-shadow: 0 0 8px #00f0ff;
+}
+
+section p, section code, section a {
+  color: #cceeff;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* ========== Glowing Divider ========== */
 hr {
   border: none;
   height: 2px;
@@ -61,7 +77,7 @@ hr {
   width: 80%;
 }
 
-/* ========== Animated Grid & VR Image ========== */
+/* ========== Animated VR Grid ========== */
 .vr-grid {
   width: 100%;
   max-width: 700px;
@@ -69,6 +85,60 @@ hr {
   display: block;
   border-radius: 12px;
   box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+}
+
+/* ========== Floating Token Section ========== */
+.vr-hero {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.vr-background img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.05;
+  z-index: 0;
+}
+
+.floating-token {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.floating-token img {
+  width: 140px;
+  filter: drop-shadow(0 0 15px cyan);
+}
+
+.vr-overlay-text {
+  position: absolute;
+  bottom: 30px;
+  text-align: center;
+  z-index: 2;
+  color: #fff;
+  text-shadow: 0 0 6px #00f6ff;
+}
+
+.vr-overlay-text h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.vr-overlay-text p {
+  font-size: 1rem;
+  color: #ccc;
 }
 
 /* ========== Footer Logo Animation ========== */
@@ -95,5 +165,8 @@ hr {
   }
   .vr-grid {
     max-width: 90%;
+  }
+  .floating-token img {
+    width: 100px;
   }
 }
