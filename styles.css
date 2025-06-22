@@ -1,111 +1,126 @@
-/* styles.css - SenaCore Immersive Theme */
+/* style.css — Upgraded Cyberpunk VR theme for SenaCore */
 
 body {
   margin: 0;
   padding: 0;
+  background: radial-gradient(circle at top, #01010c, #020013 80%);
   font-family: 'Orbitron', sans-serif;
-  background: radial-gradient(ellipse at bottom, #0f0f1a 0%, #000000 100%);
   color: #ffffff;
   overflow-x: hidden;
 }
 
-/* === Glowing Title === */
-.hero-section {
-  text-align: center;
-  padding: 80px 20px 40px;
-  background: url('/images/neural-grid.svg') repeat;
-  background-size: cover;
-  animation: pulseGrid 15s linear infinite;
+/* Glowing grid background */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: url('https://www.transparenttextures.com/patterns/graphy.png');
+  opacity: 0.05;
+  z-index: 0;
 }
 
-.hero-section img.token-logo-glow {
-  width: 64px;
-  animation: glow 2s ease-in-out infinite alternate;
-}
-
+/* Glowing header text */
 .main-title {
-  font-size: 2.5rem;
-  color: #ffb800;
-  text-shadow: 0 0 10px #ffb800, 0 0 20px #ffb800;
-  margin: 20px 0 10px;
+  font-size: 2.8rem;
+  text-align: center;
+  color: #00f0ff;
+  text-shadow: 0 0 10px #00f0ff, 0 0 20px #0077ff;
+  margin-top: 1.5rem;
 }
 
 .subtitle {
+  text-align: center;
+  color: #a0e0ff;
   font-size: 1.1rem;
-  color: #ddd;
-  max-width: 600px;
-  margin: 0 auto;
+  margin-bottom: 2rem;
 }
 
-/* === Navigation === */
+/* VR Banner section */
+.hero-section {
+  position: relative;
+  padding: 2rem 1rem;
+  background: linear-gradient(180deg, #05010c 10%, #09001c 90%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-bottom: 2px solid #0ff;
+}
+
+.hero-section img.token-logo-glow {
+  width: 100px;
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 0 8px #00f0ff);
+}
+
+/* Nav links */
 .main-nav {
   display: flex;
   justify-content: center;
-  gap: 30px;
-  padding: 16px;
-  background-color: #111111;
-  border-bottom: 1px solid #2e2e2e;
+  gap: 1.5rem;
+  background: #111;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #222;
 }
 
 .main-nav a {
-  color: #ffaa00;
-  text-decoration: none;
+  color: #00eaff;
   font-weight: bold;
-  transition: color 0.3s;
+  text-decoration: none;
+  transition: 0.3s;
 }
 
 .main-nav a:hover {
   color: #ffffff;
+  text-shadow: 0 0 10px #00eaff;
 }
 
-/* === Section Styling === */
+/* Sections */
 section {
-  padding: 40px 20px;
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 960px;
+  margin: 3rem auto;
+  padding: 1rem;
+  z-index: 1;
+  position: relative;
 }
 
 section h2, section h3 {
-  color: #ffb800;
+  color: #00eaff;
+  text-shadow: 0 0 4px #0088ff;
 }
 
+/* Contract Box */
 .contract-box {
-  background: #111;
-  border: 1px solid #ffb800;
-  padding: 10px;
+  padding: 0.75rem;
+  background: #0a0a0a;
+  border: 1px solid #00eaff;
+  border-radius: 8px;
   font-family: monospace;
-  color: #ffeea0;
-  margin-top: 10px;
+  color: #aaf6ff;
+  word-wrap: break-word;
+  margin-top: 1rem;
 }
 
-/* === Social Links === */
+/* Social Links */
 .social-links a {
-  display: inline-block;
-  margin-right: 15px;
-  color: #ffaa00;
+  margin-right: 1rem;
+  color: #00f0ff;
   text-decoration: none;
 }
 
 .social-links a:hover {
-  text-decoration: underline;
+  text-shadow: 0 0 6px #00f0ff;
 }
 
-/* === Footer === */
+/* Footer */
 footer {
-  background: #111;
-  padding: 20px;
   text-align: center;
-  font-size: 0.9em;
-  color: #999;
-}
-
-/* === Animations === */
-@keyframes glow {
-  from { filter: drop-shadow(0 0 4px #ffaa00); }
-  to   { filter: drop-shadow(0 0 12px #ffaa00); }
-}
-
-@keyframes pulseGrid {
-  0% { background-position: 0 0; }
-  100% { background-position: 100px 100px; }
+  font-size: 0.85rem;
+  padding: 2rem 1rem;
+  background: #0c0c0c;
+  color: #888;
+  border-top: 1px solid #222;
+  z-index: 1;
+  position: relative;
 }
