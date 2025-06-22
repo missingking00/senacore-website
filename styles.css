@@ -124,3 +124,52 @@ footer {
   z-index: 1;
   position: relative;
 }
+.vr-hero {
+  position: relative;
+  height: 100vh;
+  background: radial-gradient(ellipse at center, #0f0f23 0%, #000 100%);
+  background-image: url('/images/vr-background-grid-blue.gif'); /* this is your animated background */
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.floating-token {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: float 4s ease-in-out infinite;
+}
+
+.floating-token img {
+  width: 120px;
+  height: 120px;
+  filter: drop-shadow(0 0 15px #00f0ff);
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(-50%, -50%) translateY(0px);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(-20px);
+  }
+}
+
+.vr-overlay-text {
+  position: absolute;
+  bottom: 15%;
+  width: 100%;
+  text-align: center;
+  color: #ffffffc7;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.vr-overlay-text h2 {
+  font-size: 2.5em;
+  margin-bottom: 0.3em;
+  color: #00f0ff;
+  text-shadow: 0 0 10px #00f0ff;
+}
+
