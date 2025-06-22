@@ -1,187 +1,99 @@
-/* style.css — Upgraded Cyberpunk VR theme for SenaCore */
-
-body {
+/* ========== Base Styles ========== */
+* {
   margin: 0;
   padding: 0;
-  background: radial-gradient(circle at top, #01010c, #020013 80%);
+  box-sizing: border-box;
+}
+
+body {
   font-family: 'Orbitron', sans-serif;
-  color: #ffffff;
-  overflow-x: hidden;
-}
-
-/* Glowing grid background (optional texture layer) */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: url('https://www.transparenttextures.com/patterns/graphy.png');
-  opacity: 0.05;
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* Glowing header text */
-.main-title {
-  font-size: 2.8rem;
-  text-align: center;
+  background: radial-gradient(ellipse at center, #0b0b1f 0%, #000000 100%);
   color: #00f0ff;
-  text-shadow: 0 0 10px #00f0ff, 0 0 20px #0077ff;
-  margin-top: 1.5rem;
+  overflow-x: hidden;
+  background-attachment: fixed;
+}
+
+/* ========== Header & Branding ========== */
+header {
+  text-align: center;
+  padding: 60px 20px 30px;
+}
+
+.logo-glow {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 20px;
+  filter: drop-shadow(0 0 16px #00f0ff);
+  transition: transform 0.3s ease;
+}
+.logo-glow:hover {
+  transform: scale(1.1);
+}
+
+.title {
+  font-size: 2.5rem;
+  color: #00f0ff;
+  text-shadow: 0 0 12px #00f0ff;
+  margin-bottom: 10px;
 }
 
 .subtitle {
-  text-align: center;
-  color: #a0e0ff;
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
+  font-size: 1rem;
+  color: #ccccff;
+  text-shadow: 0 0 4px #00f0ff;
+  margin-bottom: 20px;
 }
 
-/* Hero section */
-.hero-section {
-  position: relative;
-  padding: 2rem 1rem;
-  background: linear-gradient(180deg, #05010c 10%, #09001c 90%);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  border-bottom: 2px solid #0ff;
-  z-index: 2;
-}
-
-.hero-section img.token-logo-glow {
-  width: 100px;
-  display: block;
-  margin: 0 auto;
-  filter: drop-shadow(0 0 8px #00f0ff);
-}
-
-/* Navigation */
-.main-nav {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  background: #111;
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid #222;
-  z-index: 3;
-  position: relative;
-}
-
-.main-nav a {
-  color: #00eaff;
-  font-weight: bold;
-  text-decoration: none;
-  transition: 0.3s;
-}
-
-.main-nav a:hover {
-  color: #ffffff;
-  text-shadow: 0 0 10px #00eaff;
-}
-
-/* VR Hero Section */
-.vr-hero {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  background: radial-gradient(ellipse at center, #0f0f23 0%, #000 100%);
-  background-image: url("images/vr-background-grid-blue.gif");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  overflow: hidden;
-  z-index: 1;
-}
-
-/* Floating Token Animation */
-.floating-token {
-  position: absolute;
-  top: 35%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  animation: float 4s ease-in-out infinite;
-  z-index: 2;
-}
-
-.floating-token img {
-  width: 120px;
-  height: 120px;
-  filter: drop-shadow(0 0 15px #00f0ff);
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translate(-50%, -50%) translateY(0px);
-  }
-  50% {
-    transform: translate(-50%, -50%) translateY(-20px);
-  }
-}
-
-/* VR Overlay Text */
-.vr-overlay-text {
-  position: absolute;
-  bottom: 15%;
-  width: 100%;
-  text-align: center;
-  color: #ffffffcc;
-  font-family: 'Orbitron', sans-serif;
-  z-index: 3;
-}
-
-.vr-overlay-text h2 {
-  font-size: 2.5em;
-  margin-bottom: 0.3em;
-  color: #00f0ff;
-  text-shadow: 0 0 10px #00f0ff;
-}
-
-/* Section Layouts */
+/* ========== Section Layout ========== */
 section {
-  max-width: 960px;
-  margin: 3rem auto;
-  padding: 1rem;
-  position: relative;
-  z-index: 2;
-}
-
-section h2, section h3 {
-  color: #00eaff;
-  text-shadow: 0 0 4px #0088ff;
-}
-
-/* Contract Box */
-.contract-box {
-  padding: 0.75rem;
-  background: #0a0a0a;
-  border: 1px solid #00eaff;
-  border-radius: 8px;
-  font-family: monospace;
-  color: #aaf6ff;
-  word-wrap: break-word;
-  margin-top: 1rem;
-}
-
-/* Social Links */
-.social-links a {
-  margin-right: 1rem;
-  color: #00f0ff;
-  text-decoration: none;
-}
-
-.social-links a:hover {
-  text-shadow: 0 0 6px #00f0ff;
-}
-
-/* Footer */
-footer {
+  padding: 30px 20px;
+  max-width: 1100px;
+  margin: auto;
   text-align: center;
-  font-size: 0.85rem;
-  padding: 2rem 1rem;
-  background: #0c0c0c;
-  color: #888;
-  border-top: 1px solid #222;
-  z-index: 2;
-  position: relative;
+}
+
+/* ========== Glowing Border Divider ========== */
+hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #00f0ff, transparent);
+  margin: 40px auto;
+  width: 80%;
+}
+
+/* ========== Animated Grid & VR Image ========== */
+.vr-grid {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+}
+
+/* ========== Footer Logo Animation ========== */
+.footer-logo {
+  width: 70px;
+  margin: 40px auto 20px;
+  display: block;
+  filter: drop-shadow(0 0 10px #00f0ff);
+  animation: pulse 3s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+
+/* ========== Responsive Typography ========== */
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.8rem;
+  }
+  .subtitle {
+    font-size: 0.9rem;
+  }
+  .vr-grid {
+    max-width: 90%;
+  }
 }
