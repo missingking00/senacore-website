@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SenaCore | Referral Access</title>
+  <title>SenaCore | Referral Program</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <style>
     body {
       background: #0a0a0a;
@@ -13,17 +14,17 @@
       margin: 0;
       padding: 2rem;
     }
-    .container {
-      max-width: 800px;
-      margin: auto;
-      background: #111;
-      padding: 2rem;
-      border-radius: 15px;
-      box-shadow: 0 0 20px #0ff4;
-    }
     h1, h2 {
       text-align: center;
       color: #0ff;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+      background: #111;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #0ff4;
     }
     input, button {
       font-family: 'Orbitron', sans-serif;
@@ -44,55 +45,43 @@
       font-weight: bold;
       cursor: pointer;
     }
-    .note {
-      font-size: 0.9rem;
-      color: #ccc;
-      text-align: center;
-      margin-top: 1rem;
-    }
-    .referral-block {
-      margin-top: 2rem;
-      background: #222;
-      padding: 1rem;
-      border-radius: 10px;
-      text-align: center;
-    }
     .leaderboard {
       margin-top: 2rem;
     }
     .leaderboard-item {
-      background: #1a1a1a;
-      padding: 0.8rem;
-      margin-bottom: 0.6rem;
-      border-radius: 10px;
+      background: #222;
       border: 1px solid #0ff2;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 0.8rem;
     }
     footer {
       text-align: center;
-      margin-top: 3rem;
+      padding: 2rem;
       font-size: 0.9rem;
       color: #888;
     }
+    .hidden { display: none; }
+    .verified { border: 1px solid #0f0; box-shadow: 0 0 10px #0f08; }
   </style>
 </head>
 <body>
+  <h1>🚀 SenaCore Referral Program</h1>
   <div class="container">
-    <h1>🔐 Secure Referral Access</h1>
-    <h2>Register Your Wallet</h2>
+    <h2>Step 1: Verify Your Wallet</h2>
     <input type="text" id="walletInput" placeholder="Enter your wallet address">
-    <button onclick="registerWallet()">Generate Secure Link</button>
-    <p class="note">Your wallet will be used to generate a private referral identity. No data is stored publicly.</p>
+    <div class="g-recaptcha" data-sitekey="your-site-key"></div>
+    <button onclick="verifyWallet()">Verify & Continue</button>
 
-    <div class="referral-block" id="referralBlock" style="display:none;">
+    <div id="referralBlock" class="hidden">
       <h2>Your Referral Link</h2>
       <input type="text" id="referralLink" readonly>
-      <p class="note">Share your unique link to rise on the leaderboard and unlock Core perks.</p>
     </div>
 
     <div class="leaderboard">
-      <h2>🔥 Top Referrers</h2>
+      <h2>🔥 Leaderboard</h2>
       <div id="leaderboardList">
-        <!-- Populated dynamically -->
+        <!-- Populated by JavaScript -->
       </div>
     </div>
   </div>
@@ -104,21 +93,31 @@
 
   <script>
     const leaderboardData = [
-      { wallet: '0xA1...9cF', referrals: 18 },
-      { wallet: '0xB3...8D1', referrals: 13 },
-      { wallet: '0xC7...6Ee', referrals: 9 }
+      { wallet: '0xA1...9cF', referrals: 14 },
+      { wallet: '0xB7...6De', referrals: 10 },
+      { wallet: '0xC3...7aA', referrals: 7 },
     ];
 
-    function registerWallet() {
-      const wallet = document.getElementById('walletInput').value.trim();
-      if (!/^0x[a-fA-F0-9]{40}$/.test(wallet)) {
+    function isValidWallet(address) {
+      return /^0x[a-fA-F0-9]{40}$/.test(address);
+    }
+
+    function verifyWallet() {
+      const wallet = document.getElementById('walletInput').value;
+      if (!isValidWallet(wallet)) {
         alert('Please enter a valid Ethereum wallet address.');
         return;
       }
-      const hash = wallet.slice(0, 6) + '...' + wallet.slice(-3);
-      const referralURL = `${window.location.origin}/referral.html?ref=${wallet}`;
-      document.getElementById('referralLink').value = referralURL;
-      document.getElementById('referralBlock').style.display = 'block';
+
+      const response = grecaptcha.getResponse();
+      if (!response) {
+        alert('Please complete the CAPTCHA.');
+        return;
+      }
+
+      document.getElementById('referralBlock').classList.remove('hidden');
+      const link = `${window.location.origin}/referral.html?ref=${wallet}`;
+      document.getElementById('referralLink').value = link;
     }
 
     function loadLeaderboard() {
@@ -127,7 +126,7 @@
       leaderboardData.forEach(entry => {
         const div = document.createElement('div');
         div.className = 'leaderboard-item';
-        div.textContent = `${entry.wallet} — ${entry.referrals} referrals`;
+        div.innerText = `${entry.wallet} — ${entry.referrals} referrals`;
         list.appendChild(div);
       });
     }
