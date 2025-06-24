@@ -1,3 +1,4 @@
+
 /* ========== Base Styles ========== */
 * {
   margin: 0;
@@ -20,15 +21,15 @@ header {
 }
 
 .token-logo-glow {
-  width: 70px;
-  height: 70px;
-  margin: 0 auto 30px;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 20px;
   filter: drop-shadow(0 0 20px #00f0ff);
   animation: pulse 3s infinite ease-in-out;
 }
 
 .main-title {
-  font-size: 2.8rem;
+  font-size: 2.5rem;
   color: #00f0ff;
   text-shadow: 0 0 14px #00f0ff;
   margin-bottom: 10px;
@@ -90,7 +91,7 @@ hr {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.05;
+  opacity: 0.08;
   z-index: 0;
 }
 
@@ -98,22 +99,22 @@ hr {
 .floating-token {
   position: absolute;
   z-index: 2;
-  top: 50%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   animation: floatToken 4s ease-in-out infinite;
 }
 
 .floating-token img {
-  width: 90px;
-  max-width: 20vw;
+  width: 80px;
+  max-width: 18vw;
   filter: drop-shadow(0 0 15px cyan);
 }
 
 /* === VR Overlay Text === */
 .vr-overlay-text {
   position: absolute;
-  bottom: 30px;
+  bottom: 20px;
   text-align: center;
   z-index: 3;
   color: #fff;
@@ -132,7 +133,7 @@ hr {
 
 /* ========== Footer Logo Animation ========== */
 .footer-logo {
-  width: 70px;
+  width: 60px;
   margin: 40px auto 20px;
   display: block;
   filter: drop-shadow(0 0 10px #00f0ff);
@@ -153,23 +154,28 @@ hr {
 /* ========== Responsive ========== */
 @media (max-width: 768px) {
   .main-title {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
   .subtitle {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 
   .vr-overlay-text h2 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
   .floating-token img {
-    width: 100px;
+    width: 70px;
+  }
+
+  .token-logo-glow {
+    width: 50px;
+    height: 50px;
   }
 
   section {
-    padding: 30px 15px;
-    margin: 30px 10px;
+    padding: 25px 12px;
+    margin: 25px 8px;
   }
 }
