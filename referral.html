@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SenaCore | Referral Program</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <style>
     body {
       background: #0a0a0a;
@@ -55,28 +54,52 @@
       border-radius: 10px;
       margin-bottom: 0.8rem;
     }
+    .social-links {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .social-links a {
+      color: #00e0ff;
+      margin: 0 10px;
+      text-decoration: underline;
+      font-size: 1rem;
+    }
+    .checkbox-area {
+      margin-top: 1rem;
+      text-align: left;
+    }
     footer {
       text-align: center;
       padding: 2rem;
       font-size: 0.9rem;
       color: #888;
     }
-    .hidden { display: none; }
-    .verified { border: 1px solid #0f0; box-shadow: 0 0 10px #0f08; }
   </style>
 </head>
 <body>
   <h1>🚀 SenaCore Referral Program</h1>
-  <div class="container">
-    <h2>Step 1: Verify Your Wallet</h2>
-    <input type="text" id="walletInput" placeholder="Enter your wallet address">
-    <div class="g-recaptcha" data-sitekey="your-site-key"></div>
-    <button onclick="verifyWallet()">Verify & Continue</button>
 
-    <div id="referralBlock" class="hidden">
-      <h2>Your Referral Link</h2>
-      <input type="text" id="referralLink" readonly>
+  <div class="container">
+    <div class="social-links">
+      <p>🔗 Please follow us before unlocking your referral code:</p>
+      <a href="https://twitter.com/Sena_Core_Ai" target="_blank">Twitter</a>
+      <a href="https://instagram.com/sena.core.ai" target="_blank">Instagram</a>
+      <a href="https://t.me/+2VIUs-K8GJpkYTI1" target="_blank">Telegram</a>
     </div>
+
+    <div class="checkbox-area">
+      <label>
+        <input type="checkbox" id="followCheckbox">
+        I confirm I followed SenaCore social channels.
+      </label>
+    </div>
+
+    <h2>Register Your Wallet</h2>
+    <input type="text" id="walletInput" placeholder="Enter your wallet address">
+    <button onclick="registerWallet()">Generate Referral Link</button>
+
+    <h2>Your Referral Link</h2>
+    <input type="text" id="referralLink" readonly>
 
     <div class="leaderboard">
       <h2>🔥 Leaderboard</h2>
@@ -98,24 +121,18 @@
       { wallet: '0xC3...7aA', referrals: 7 },
     ];
 
-    function isValidWallet(address) {
-      return /^0x[a-fA-F0-9]{40}$/.test(address);
-    }
-
-    function verifyWallet() {
+    function registerWallet() {
       const wallet = document.getElementById('walletInput').value;
-      if (!isValidWallet(wallet)) {
-        alert('Please enter a valid Ethereum wallet address.');
+      const checkbox = document.getElementById('followCheckbox');
+
+      if (!checkbox.checked) {
+        alert('Please confirm that you followed our social channels first.');
         return;
       }
-
-      const response = grecaptcha.getResponse();
-      if (!response) {
-        alert('Please complete the CAPTCHA.');
+      if (wallet.length < 10) {
+        alert('Please enter a valid wallet address.');
         return;
       }
-
-      document.getElementById('referralBlock').classList.remove('hidden');
       const link = `${window.location.origin}/referral.html?ref=${wallet}`;
       document.getElementById('referralLink').value = link;
     }
