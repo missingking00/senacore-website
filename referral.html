@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SenaCore | Referral Program</title>
+  <title>SenaCore | Referral Access</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
   <style>
     body {
@@ -13,17 +13,17 @@
       margin: 0;
       padding: 2rem;
     }
-    h1, h2 {
-      text-align: center;
-      color: #0ff;
-    }
     .container {
       max-width: 800px;
       margin: auto;
-      padding: 2rem;
       background: #111;
+      padding: 2rem;
       border-radius: 15px;
       box-shadow: 0 0 20px #0ff4;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #0ff;
     }
     input, button {
       font-family: 'Orbitron', sans-serif;
@@ -44,39 +44,55 @@
       font-weight: bold;
       cursor: pointer;
     }
+    .note {
+      font-size: 0.9rem;
+      color: #ccc;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .referral-block {
+      margin-top: 2rem;
+      background: #222;
+      padding: 1rem;
+      border-radius: 10px;
+      text-align: center;
+    }
     .leaderboard {
       margin-top: 2rem;
     }
     .leaderboard-item {
-      background: #222;
-      border: 1px solid #0ff2;
-      padding: 1rem;
+      background: #1a1a1a;
+      padding: 0.8rem;
+      margin-bottom: 0.6rem;
       border-radius: 10px;
-      margin-bottom: 0.8rem;
+      border: 1px solid #0ff2;
     }
     footer {
       text-align: center;
-      padding: 2rem;
+      margin-top: 3rem;
       font-size: 0.9rem;
       color: #888;
     }
   </style>
 </head>
 <body>
-  <h1>🚀 SenaCore Referral Program</h1>
-
   <div class="container">
+    <h1>🔐 Secure Referral Access</h1>
     <h2>Register Your Wallet</h2>
     <input type="text" id="walletInput" placeholder="Enter your wallet address">
-    <button onclick="registerWallet()">Generate Referral Link</button>
+    <button onclick="registerWallet()">Generate Secure Link</button>
+    <p class="note">Your wallet will be used to generate a private referral identity. No data is stored publicly.</p>
 
-    <h2>Your Referral Link</h2>
-    <input type="text" id="referralLink" readonly>
+    <div class="referral-block" id="referralBlock" style="display:none;">
+      <h2>Your Referral Link</h2>
+      <input type="text" id="referralLink" readonly>
+      <p class="note">Share your unique link to rise on the leaderboard and unlock Core perks.</p>
+    </div>
 
     <div class="leaderboard">
-      <h2>🔥 Leaderboard</h2>
+      <h2>🔥 Top Referrers</h2>
       <div id="leaderboardList">
-        <!-- Populated by JavaScript -->
+        <!-- Populated dynamically -->
       </div>
     </div>
   </div>
@@ -87,21 +103,22 @@
   </footer>
 
   <script>
-    // Temporary data store for example (replace with actual backend logic)
     const leaderboardData = [
-      { wallet: '0xA1...9cF', referrals: 14 },
-      { wallet: '0xB7...6De', referrals: 10 },
-      { wallet: '0xC3...7aA', referrals: 7 },
+      { wallet: '0xA1...9cF', referrals: 18 },
+      { wallet: '0xB3...8D1', referrals: 13 },
+      { wallet: '0xC7...6Ee', referrals: 9 }
     ];
 
     function registerWallet() {
-      const wallet = document.getElementById('walletInput').value;
-      if (wallet.length < 10) {
-        alert('Please enter a valid wallet address.');
+      const wallet = document.getElementById('walletInput').value.trim();
+      if (!/^0x[a-fA-F0-9]{40}$/.test(wallet)) {
+        alert('Please enter a valid Ethereum wallet address.');
         return;
       }
-      const link = `${window.location.origin}/referral.html?ref=${wallet}`;
-      document.getElementById('referralLink').value = link;
+      const hash = wallet.slice(0, 6) + '...' + wallet.slice(-3);
+      const referralURL = `${window.location.origin}/referral.html?ref=${wallet}`;
+      document.getElementById('referralLink').value = referralURL;
+      document.getElementById('referralBlock').style.display = 'block';
     }
 
     function loadLeaderboard() {
@@ -110,7 +127,7 @@
       leaderboardData.forEach(entry => {
         const div = document.createElement('div');
         div.className = 'leaderboard-item';
-        div.innerText = `${entry.wallet} — ${entry.referrals} referrals`;
+        div.textContent = `${entry.wallet} — ${entry.referrals} referrals`;
         list.appendChild(div);
       });
     }
@@ -119,4 +136,3 @@
   </script>
 </body>
 </html>
-
