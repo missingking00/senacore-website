@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
   <style>
     body {
-      background: #0a0a0a;
+      background: linear-gradient(135deg, #0a0a0a, #10131a);
       color: #00e0ff;
       font-family: 'Orbitron', sans-serif;
       margin: 0;
@@ -17,26 +17,27 @@
       text-align: center;
       color: #0ff;
     }
-    .container {
-      max-width: 800px;
-      margin: auto;
+    .section {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: rgba(20, 20, 30, 0.9);
+      border-radius: 20px;
       padding: 2rem;
-      background: #111;
-      border-radius: 15px;
-      box-shadow: 0 0 20px #0ff4;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
+      border: 1px solid rgba(0, 255, 255, 0.2);
     }
     input, button {
-      font-family: 'Orbitron', sans-serif;
-      padding: 0.8rem;
       width: 100%;
+      padding: 1rem;
       margin-top: 1rem;
-      border: none;
       border-radius: 10px;
+      border: none;
+      font-family: 'Orbitron', sans-serif;
     }
     input {
       background: #000;
       color: #00e0ff;
-      border: 1px solid #0ff4;
+      border: 1px solid #00e0ff33;
     }
     button {
       background: #00e0ff;
@@ -44,29 +45,31 @@
       font-weight: bold;
       cursor: pointer;
     }
-    .leaderboard {
+    .leaderboard-item {
+      background: #151a21;
+      border: 1px solid #00e0ff44;
+      padding: 1rem;
+      margin-top: 0.5rem;
+      border-radius: 10px;
+    }
+    .social-media {
+      text-align: center;
       margin-top: 2rem;
     }
-    .leaderboard-item {
-      background: #222;
-      border: 1px solid #0ff2;
-      padding: 1rem;
-      border-radius: 10px;
-      margin-bottom: 0.8rem;
-    }
-    .social-links {
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
-    .social-links a {
+    .social-media a {
+      display: inline-block;
+      margin: 0.5rem;
+      padding: 0.8rem 1.2rem;
+      background: #00e0ff22;
+      border: 1px solid #00e0ff44;
       color: #00e0ff;
-      margin: 0 10px;
-      text-decoration: underline;
-      font-size: 1rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
     }
-    .checkbox-area {
-      margin-top: 1rem;
-      text-align: left;
+    .social-media a:hover {
+      background: #00e0ff44;
     }
     footer {
       text-align: center;
@@ -79,21 +82,7 @@
 <body>
   <h1>🚀 SenaCore Referral Program</h1>
 
-  <div class="container">
-    <div class="social-links">
-      <p>🔗 Please follow us before unlocking your referral code:</p>
-      <a href="https://twitter.com/Sena_Core_Ai" target="_blank">Twitter</a>
-      <a href="https://instagram.com/sena.core.ai" target="_blank">Instagram</a>
-      <a href="https://t.me/+2VIUs-K8GJpkYTI1" target="_blank">Telegram</a>
-    </div>
-
-    <div class="checkbox-area">
-      <label>
-        <input type="checkbox" id="followCheckbox">
-        I confirm I followed SenaCore social channels.
-      </label>
-    </div>
-
+  <div class="section">
     <h2>Register Your Wallet</h2>
     <input type="text" id="walletInput" placeholder="Enter your wallet address">
     <button onclick="registerWallet()">Generate Referral Link</button>
@@ -101,11 +90,16 @@
     <h2>Your Referral Link</h2>
     <input type="text" id="referralLink" readonly>
 
+    <div class="social-media">
+      <p><strong>To activate your referral link:</strong> Follow all our official social media accounts below:</p>
+      <a href="https://twitter.com/Sena_Core_Ai" target="_blank">Follow Twitter</a>
+      <a href="https://t.me/+2VIUs-K8GJpkYTI1" target="_blank">Join Telegram</a>
+      <a href="https://instagram.com/sena.core.ai" target="_blank">Follow Instagram</a>
+    </div>
+
     <div class="leaderboard">
       <h2>🔥 Leaderboard</h2>
-      <div id="leaderboardList">
-        <!-- Populated by JavaScript -->
-      </div>
+      <div id="leaderboardList"></div>
     </div>
   </div>
 
@@ -123,12 +117,6 @@
 
     function registerWallet() {
       const wallet = document.getElementById('walletInput').value;
-      const checkbox = document.getElementById('followCheckbox');
-
-      if (!checkbox.checked) {
-        alert('Please confirm that you followed our social channels first.');
-        return;
-      }
       if (wallet.length < 10) {
         alert('Please enter a valid wallet address.');
         return;
