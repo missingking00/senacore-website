@@ -3,110 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SenaCore | Future Starts Now</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <title>SenaCore</title>
   <style>
     body {
       margin: 0;
+      background-color: #0d0d0d;
+      color: #ffffff;
       font-family: 'Orbitron', sans-serif;
-      background-color: #0a0a0a;
-      color: #00e0ff;
     }
-
     header {
-      background: #000;
-      padding: 1.5rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid #0ff2;
+      padding: 20px;
+      background-color: #0d0d0d;
+      border-bottom: 1px solid #222;
     }
-
     header h1 {
-      font-size: 1.8rem;
-      color: #00f0ff;
-      margin: 0;
+      color: #00f7ff;
     }
-
     nav a {
-      color: #00e0ff;
+      color: #00f7ff;
+      margin-left: 20px;
       text-decoration: none;
-      margin-left: 1.5rem;
-      font-weight: bold;
     }
-
-    .hero {
-      padding: 4rem 2rem;
-      text-align: center;
-    }
-
-    .hero h2 {
-      font-size: 2.5rem;
-      color: #0ff;
-    }
-
-    .hero p {
-      max-width: 700px;
-      margin: 1rem auto;
-      font-size: 1.1rem;
-      color: #bafaff;
-    }
-
-    .section {
-      padding: 3rem 2rem;
-      max-width: 1000px;
+    .container {
+      padding: 40px 20px;
+      max-width: 1200px;
       margin: auto;
     }
-
-    .section h3 {
-      font-size: 1.8rem;
-      color: #0ff;
-      margin-bottom: 1rem;
+    .section-title {
+      font-size: 28px;
+      color: #00f7ff;
+      margin-bottom: 20px;
     }
-
-    .section p {
-      font-size: 1rem;
-      line-height: 1.7;
-      color: #c0f7ff;
-    }
-
-    .features {
+    .card-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
     }
-
-    .feature-card {
+    .card {
       background: #111;
-      border: 1px solid #0ff4;
+      border: 1px solid #00f7ff40;
       border-radius: 12px;
-      padding: 2rem;
+      padding: 20px;
       text-align: center;
-      box-shadow: 0 0 20px #0ff1;
-      transition: transform 0.3s;
     }
-
-    .feature-card:hover {
-      transform: scale(1.03);
-      box-shadow: 0 0 30px #00f8ff;
+    .card svg {
+      width: 40px;
+      height: 40px;
+      fill: #00f7ff;
+      margin-bottom: 15px;
     }
-
-    .feature-card h4 {
-      color: #00f0ff;
-      margin-bottom: 0.5rem;
-    }
-
-    .feature-card p {
-      color: #aeefff;
-      font-size: 0.95rem;
-    }
-
     footer {
       text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #888;
+      padding: 30px;
+      font-size: 14px;
+      color: #aaa;
+    }
+    footer span {
+      color: #00f7ff;
     }
   </style>
 </head>
@@ -114,47 +71,47 @@
   <header>
     <h1>SenaCore</h1>
     <nav>
-      <a href="/litepaper.html">Litepaper</a>
-      <a href="/roadmap.html">Roadmap</a>
-      <a href="/referral.html">Referral</a>
+      <a href="#litepaper">Litepaper</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#referral">Referral</a>
     </nav>
   </header>
 
-  <section class="hero">
-    <h2>Empowering the Future of Human-AI Synergy</h2>
-    <p>SenaCore is building the next-generation digital layer — where intelligence, identity, and blockchain value evolve together. Join the movement that’s reshaping interaction, trust, and decentralized power.</p>
-  </section>
+  <div class="container">
+    <h2 class="section-title">Empowering the Future of Human-AI Synergy</h2>
+    <p>SenaCore is building the next-generation digital layer — where intelligence, identity, and blockchain value evolve together. Join the movement that's reshaping interaction, trust, and decentralized power.</p>
 
-  <section class="section">
-    <h3>About SenaCore</h3>
-    <p>SenaCore is a decentralized technology initiative designed to harmonize artificial intelligence and blockchain into one evolving ecosystem. With secure smart contracts, NFT-backed Core companions, and deep utility tokens, we’re pioneering a future where users don't just interact with tech — they evolve with it.</p>
-  </section>
+    <h2 class="section-title">About SenaCore</h2>
+    <p>SenaCore is a decentralized technology initiative designed to harmonize artificial intelligence and blockchain into one evolving ecosystem. With secure smart contracts, NFT-backed Core companions, and deep utility tokens, we're pioneering a future where users don't just interact with tech — they evolve with it.</p>
 
-  <section class="section">
-    <h3>Core Token Utility</h3>
-    <div class="features">
-      <div class="feature-card">
-        <h4>Staking & Governance</h4>
+    <h2 class="section-title">Core Token Utility</h2>
+    <div class="card-grid">
+      <div class="card">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9v4.28c0 .89-.39 1.74-1.08 2.32l-1.42 1.18a1 1 0 0 0 .5 1.76h16a1 1 0 0 0 .5-1.76l-1.42-1.18A3.003 3.003 0 0 1 19 13.28V9c0-3.87-3.13-7-7-7z"/></svg>
+        <h3>Staking & Governance</h3>
         <p>Stake $SENA to access exclusive governance rights and shape the future direction of the ecosystem.</p>
       </div>
-      <div class="feature-card">
-        <h4>AI-Powered Access</h4>
+      <div class="card">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10.01142 10.01142 0 0 0 12 2zm1 17.93V20h-2v-.07A8.01212 8.01212 0 0 1 4.07 13H4v-2h.07A8.01212 8.01212 0 0 1 11 4.07V4h2v.07A8.01212 8.01212 0 0 1 19.93 11H20v2h-.07A8.01212 8.01212 0 0 1 13 19.93z"/></svg>
+        <h3>AI-Powered Access</h3>
         <p>Use $SENA to activate Core upgrades, personalize AI companions, and unlock enhanced SenaLite functions.</p>
       </div>
-      <div class="feature-card">
-        <h4>Referral Rewards</h4>
+      <div class="card">
+        <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 3-1.34 3-3s-1.34-3-3-3S13 6.34 13 8s1.34 3 3 3zm-8 0c1.66 0 3-1.34 3-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V20h14v-3.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 2.01 1.97 3.45V20h6v-3.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+        <h3>Referral Rewards</h3>
         <p>Earn passive incentives through a smart referral system designed to grow our community with real engagement.</p>
       </div>
-      <div class="feature-card">
-        <h4>Future Integration</h4>
+      <div class="card">
+        <svg viewBox="0 0 24 24"><path d="M12 6v6l4.243 2.828 1.414-1.414L13 10.172V6h-1zm9.707 2.293-1.414 1.414a9.953 9.953 0 0 1 0 8.586l1.414 1.414a11.953 11.953 0 0 0 0-11.414zM4.293 4.293 2.879 5.707a11.953 11.953 0 0 0 0 12.586l1.414-1.414a9.953 9.953 0 0 1 0-9.758z"/></svg>
+        <h3>Future Integration</h3>
         <p>$SENA is your gateway to future token expansions like $ECO and $COREX, built for real-world digital synergy.</p>
       </div>
     </div>
-  </section>
+  </div>
 
   <footer>
-    Powered by <strong>$SENA</strong> — The Core of AI, Crypto, and the Human Future<br>
-    © 2025 <strong>SenaCore Labs</strong>. All rights reserved.
+    Powered by <span>$SENA</span> — The Core of AI, Crypto, and the Human Future<br>
+    &copy; 2025 <span>SenaCore Labs</span>. All rights reserved.
   </footer>
 </body>
 </html>
