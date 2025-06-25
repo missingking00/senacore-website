@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SenaCore | Referral Program</title>
+  <title>SenaCore | Referral Access</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
   <style>
     body {
-      background: linear-gradient(135deg, #0a0a0a, #10131a);
+      background: #0a0a0a;
       color: #00e0ff;
       font-family: 'Orbitron', sans-serif;
       margin: 0;
@@ -17,27 +17,26 @@
       text-align: center;
       color: #0ff;
     }
-    .section {
-      max-width: 900px;
-      margin: 2rem auto;
-      background: rgba(20, 20, 30, 0.9);
-      border-radius: 20px;
+    .container {
+      max-width: 800px;
+      margin: auto;
       padding: 2rem;
-      box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
-      border: 1px solid rgba(0, 255, 255, 0.2);
+      background: #111;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #0ff4;
     }
     input, button {
-      width: 100%;
-      padding: 1rem;
-      margin-top: 1rem;
-      border-radius: 10px;
-      border: none;
       font-family: 'Orbitron', sans-serif;
+      padding: 0.8rem;
+      width: 100%;
+      margin-top: 1rem;
+      border: none;
+      border-radius: 10px;
     }
     input {
       background: #000;
       color: #00e0ff;
-      border: 1px solid #00e0ff33;
+      border: 1px solid #0ff4;
     }
     button {
       background: #00e0ff;
@@ -45,31 +44,15 @@
       font-weight: bold;
       cursor: pointer;
     }
-    .leaderboard-item {
-      background: #151a21;
-      border: 1px solid #00e0ff44;
-      padding: 1rem;
-      margin-top: 0.5rem;
-      border-radius: 10px;
-    }
-    .social-media {
-      text-align: center;
+    .leaderboard {
       margin-top: 2rem;
     }
-    .social-media a {
-      display: inline-block;
-      margin: 0.5rem;
-      padding: 0.8rem 1.2rem;
-      background: #00e0ff22;
-      border: 1px solid #00e0ff44;
-      color: #00e0ff;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: all 0.3s ease;
-    }
-    .social-media a:hover {
-      background: #00e0ff44;
+    .leaderboard-item {
+      background: #222;
+      border: 1px solid #0ff2;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 0.8rem;
     }
     footer {
       text-align: center;
@@ -77,25 +60,25 @@
       font-size: 0.9rem;
       color: #888;
     }
+    #warningMsg {
+      color: #ff4444;
+      text-align: center;
+      margin-top: 2rem;
+    }
   </style>
 </head>
 <body>
-  <h1>🚀 SenaCore Referral Program</h1>
+  <h1>🚀 SenaCore Referral Access</h1>
 
-  <div class="section">
+  <div id="warningMsg">Access denied. You must use a valid referral link or be on the whitelist to register.</div>
+
+  <div id="referralSection" class="container" style="display:none;">
     <h2>Register Your Wallet</h2>
     <input type="text" id="walletInput" placeholder="Enter your wallet address">
     <button onclick="registerWallet()">Generate Referral Link</button>
 
     <h2>Your Referral Link</h2>
     <input type="text" id="referralLink" readonly>
-
-    <div class="social-media">
-      <p><strong>To activate your referral link:</strong> Follow all our official social media accounts below:</p>
-      <a href="https://twitter.com/Sena_Core_Ai" target="_blank">Follow Twitter</a>
-      <a href="https://t.me/+2VIUs-K8GJpkYTI1" target="_blank">Join Telegram</a>
-      <a href="https://instagram.com/sena.core.ai" target="_blank">Follow Instagram</a>
-    </div>
 
     <div class="leaderboard">
       <h2>🔥 Leaderboard</h2>
@@ -109,24 +92,58 @@
   </footer>
 
   <script>
+    const whitelist = [
+      "0x8DEc2ABaA752987b10aC9Bb38A35418C46AC8867",
+      "0x56bE70100fd7cAfA00088BA485AEf9F8828bB714",
+      "0x4d9C76D03BD8061a595B9e0F246807250d138701",
+      "0x5cd86343522574951d5B36725D7bE3b94d7d3401",
+      "0x677c7579cf6b71b76D5d83E46cE02f2d49Ed1231",
+      "0xaE72A45f89fE61733fc9a0619D3CD34D7C285c29",
+      "0xD196F08CEB18b6266B2C715f31015F5BaF7cCA70",
+      "0x057798D8B23a4a8D8420F0B5cdBb8aCf6E21d03D",
+      "0x567592e83Bf73856e4120D84622bF7088dC5c96E"
+    ];
+
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get("ref");
+
+    const referralSection = document.getElementById("referralSection");
+    const warningMsg = document.getElementById("warningMsg");
+
+    const walletInput = document.getElementById("walletInput");
+    const referralLink = document.getElementById("referralLink");
+
+    // Simulated backend leaderboard data
     const leaderboardData = [
       { wallet: '0xA1...9cF', referrals: 14 },
       { wallet: '0xB7...6De', referrals: 10 },
       { wallet: '0xC3...7aA', referrals: 7 },
     ];
 
+    function checkAccess() {
+      const accessAllowed = ref || whitelist.includes(params.get("wallet"));
+      if (accessAllowed) {
+        referralSection.style.display = "block";
+        warningMsg.style.display = "none";
+      }
+    }
+
     function registerWallet() {
-      const wallet = document.getElementById('walletInput').value;
-      if (wallet.length < 10) {
-        alert('Please enter a valid wallet address.');
+      const wallet = walletInput.value.trim();
+      if (wallet.length < 10 || !wallet.startsWith("0x")) {
+        alert("Please enter a valid wallet address.");
         return;
       }
-      const link = `${window.location.origin}/referral.html?ref=${wallet}`;
-      document.getElementById('referralLink').value = link;
+      if (wallet.toLowerCase() === ref?.toLowerCase()) {
+        alert("You cannot refer yourself.");
+        return;
+      }
+      const newLink = `${window.location.origin}${window.location.pathname}?ref=${wallet}`;
+      referralLink.value = newLink;
     }
 
     function loadLeaderboard() {
-      const list = document.getElementById('leaderboardList');
+      const list = document.getElementById("leaderboardList");
       leaderboardData.sort((a, b) => b.referrals - a.referrals);
       leaderboardData.forEach(entry => {
         const div = document.createElement('div');
@@ -136,6 +153,7 @@
       });
     }
 
+    checkAccess();
     loadLeaderboard();
   </script>
 </body>
