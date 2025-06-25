@@ -3,46 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SenaCore | Referral Access</title>
+  <title>SenaCore | Referral Program</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"> <!-- Reuse main CSS -->
   <style>
     body {
+      font-family: 'Orbitron', sans-serif;
       background: #0a0a0a;
       color: #00e0ff;
-      font-family: 'Orbitron', sans-serif;
       margin: 0;
       padding: 2rem;
+    }
+    .referral-container {
+      max-width: 900px;
+      margin: auto;
+      background: #111;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 0 20px #00f0ff33;
     }
     h1, h2 {
       text-align: center;
       color: #0ff;
     }
-    .container {
-      max-width: 800px;
-      margin: auto;
-      padding: 2rem;
-      background: #111;
-      border-radius: 15px;
-      box-shadow: 0 0 20px #0ff4;
-    }
     input, button {
-      font-family: 'Orbitron', sans-serif;
-      padding: 0.8rem;
+      display: block;
       width: 100%;
+      padding: 0.8rem;
       margin-top: 1rem;
-      border: none;
       border-radius: 10px;
-    }
-    input {
+      border: 1px solid #0ff4;
       background: #000;
       color: #00e0ff;
-      border: 1px solid #0ff4;
+      font-family: 'Orbitron', sans-serif;
     }
     button {
       background: #00e0ff;
       color: #000;
       font-weight: bold;
       cursor: pointer;
+    }
+    .locked-message, .success-message {
+      text-align: center;
+      margin-top: 1rem;
+      color: #f0c000;
     }
     .leaderboard {
       margin-top: 2rem;
@@ -54,45 +58,46 @@
       border-radius: 10px;
       margin-bottom: 0.8rem;
     }
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #888;
-    }
-    #warningMsg {
-      color: #ff4444;
-      text-align: center;
-      margin-top: 2rem;
-    }
   </style>
 </head>
 <body>
-  <h1>🚀 SenaCore Referral Access</h1>
 
-  <div id="warningMsg">Access denied. You must use a valid referral link or be on the whitelist to register.</div>
+  <div class="referral-container">
+    <h1>🚀 SenaCore Referral Program</h1>
 
-  <div id="referralSection" class="container" style="display:none;">
-    <h2>Register Your Wallet</h2>
-    <input type="text" id="walletInput" placeholder="Enter your wallet address">
-    <button onclick="registerWallet()">Generate Referral Link</button>
+    <div id="social-check">
+      <p>Please follow us on all platforms to continue:</p>
+      <ul>
+        <li><a href="https://twitter.com/Sena_Core_Ai" target="_blank">Follow on Twitter</a></li>
+        <li><a href="https://instagram.com/sena.core.ai" target="_blank">Follow on Instagram</a></li>
+        <li><a href="https://t.me/+2VIUs-K8GJpkYTI1" target="_blank">Join Telegram</a></li>
+        <li><a href="https://discord.gg/RzJQHaqbvC" target="_blank">Join Discord</a></li>
+      </ul>
+      <button onclick="unlockReferralForm()">I Followed All</button>
+    </div>
 
-    <h2>Your Referral Link</h2>
-    <input type="text" id="referralLink" readonly>
+    <div id="referral-form" style="display:none;">
+      <h2>Register Your Wallet</h2>
+      <input type="text" id="walletInput" placeholder="Enter your wallet address">
+      <button onclick="generateReferral()">Generate Referral Link</button>
+      <div class="success-message" id="successBox"></div>
 
-    <div class="leaderboard">
-      <h2>🔥 Leaderboard</h2>
-      <div id="leaderboardList"></div>
+      <h2>Your Referral Link</h2>
+      <input type="text" id="referralLink" readonly>
+
+      <div class="leaderboard">
+        <h2>🔥 Top Referrers</h2>
+        <div id="leaderboardList"></div>
+      </div>
+    </div>
+
+    <div class="locked-message" id="lockedBox" style="display:none;">
+      ❌ You must be referred or whitelisted to generate a referral link.
     </div>
   </div>
 
-  <footer>
-    Powered by <strong>$SENA</strong> — The Core of AI, Crypto, and the Human Future<br>
-    © 2025 <strong>SenaCore Labs</strong>. All rights reserved.
-  </footer>
-
   <script>
-    const whitelist = [
+    const whitelisted = [
       "0x8DEc2ABaA752987b10aC9Bb38A35418C46AC8867",
       "0x56bE70100fd7cAfA00088BA485AEf9F8828bB714",
       "0x4d9C76D03BD8061a595B9e0F246807250d138701",
@@ -104,46 +109,41 @@
       "0x567592e83Bf73856e4120D84622bF7088dC5c96E"
     ];
 
-    const params = new URLSearchParams(window.location.search);
-    const ref = params.get("ref");
-
-    const referralSection = document.getElementById("referralSection");
-    const warningMsg = document.getElementById("warningMsg");
-
-    const walletInput = document.getElementById("walletInput");
-    const referralLink = document.getElementById("referralLink");
-
-    // Simulated backend leaderboard data
     const leaderboardData = [
       { wallet: '0xA1...9cF', referrals: 14 },
       { wallet: '0xB7...6De', referrals: 10 },
       { wallet: '0xC3...7aA', referrals: 7 },
     ];
 
-    function checkAccess() {
-      const accessAllowed = ref || whitelist.includes(params.get("wallet"));
-      if (accessAllowed) {
-        referralSection.style.display = "block";
-        warningMsg.style.display = "none";
-      }
+    function unlockReferralForm() {
+      document.getElementById("social-check").style.display = "none";
+      document.getElementById("referral-form").style.display = "block";
     }
 
-    function registerWallet() {
-      const wallet = walletInput.value.trim();
-      if (wallet.length < 10 || !wallet.startsWith("0x")) {
-        alert("Please enter a valid wallet address.");
+    function generateReferral() {
+      const wallet = document.getElementById('walletInput').value.trim();
+      const successBox = document.getElementById('successBox');
+      const referralBox = document.getElementById('referralLink');
+      const lockedBox = document.getElementById('lockedBox');
+
+      if (!wallet.startsWith("0x") || wallet.length !== 42) {
+        successBox.textContent = "Invalid wallet address.";
         return;
       }
-      if (wallet.toLowerCase() === ref?.toLowerCase()) {
-        alert("You cannot refer yourself.");
+
+      if (!whitelisted.includes(wallet) && !window.location.search.includes("ref=")) {
+        lockedBox.style.display = 'block';
         return;
       }
-      const newLink = `${window.location.origin}${window.location.pathname}?ref=${wallet}`;
-      referralLink.value = newLink;
+
+      const referralCode = wallet.substring(0, 6) + "..." + wallet.slice(-4);
+      const link = `${window.location.origin}/referral.html?ref=${wallet}`;
+      referralBox.value = link;
+      successBox.textContent = `✅ Referral generated: ${referralCode}`;
     }
 
     function loadLeaderboard() {
-      const list = document.getElementById("leaderboardList");
+      const list = document.getElementById('leaderboardList');
       leaderboardData.sort((a, b) => b.referrals - a.referrals);
       leaderboardData.forEach(entry => {
         const div = document.createElement('div');
@@ -153,7 +153,6 @@
       });
     }
 
-    checkAccess();
     loadLeaderboard();
   </script>
 </body>
